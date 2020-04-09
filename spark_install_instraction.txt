@@ -1,0 +1,39 @@
+sudo apt update
+sudo apt -y upgrade
+
+#install java hatman verjen 1.8 nasb shavad
+sudo apt install openjdk-8-jdk
+#sudo apt install default-jdk
+java -version
+
+sudo apt update
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt update
+sudo apt install oracle-java8-installer oracle-java8-set-default
+
+#Download Apache Spark
+tar xvf spark-2.4.2-bin-hadoop2.7.tgz
+
+vim ~/.bashrc
+
+#Add
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+#exit bashrc --> :wq enter
+
+source ~/.bashrc
+
+start-master.sh
+
+ss -tunelp | grep 8080
+
+start-slave.sh spark://ubuntu:7077
+
+locate start-slave.sh
+
+SPARK_HOME/sbin/stop-slave.sh
+
+SPARK_HOME/sbin/stop-master.sh
+
+pip install --user pyspark
+pip install --user findspark
